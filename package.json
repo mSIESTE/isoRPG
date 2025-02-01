@@ -1,0 +1,26 @@
+{
+  "name": "isorpg",
+  "version": "1.0.0",
+  "description": "NODEJS THREEJS isoRPG Game Dev Test",
+  "main": "index.js",
+  "scripts": {
+    "test": "node index.js",
+    "dev": "vite --host 127.0.0.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mSIESTE/isoRPG.git"
+  },
+  "author": "mSIESTE",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mSIESTE/isoRPG/issues"
+  },
+  "homepage": "https://github.com/mSIESTE/isoRPG#readme",
+  "dependencies": {
+    "three": "^0.173.0"
+  },
+  "devDependencies": {
+    "vite": "^6.0.11"
+  }
+}
