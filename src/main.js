@@ -3,6 +3,7 @@ import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import Stats from 'three/examples/jsm/libs/stats.module';
 import { GUI } from 'three/addons/libs/lil-gui.module.min.js'
 import { ThreeMFLoader } from 'three/examples/jsm/Addons.js';
+import { World } from './world';
 
 const gui = new GUI();
 
@@ -18,32 +19,25 @@ renderer.setSize( window.innerWidth, window.innerHeight );
 renderer.setAnimationLoop( animate );
 document.body.appendChild( renderer.domElement );
 
+const world = new World(5,5);
+scene.add(world);
+
 const sun = new THREE.DirectionalLight();
 sun.position.set(1,2,3);
+sun.intensity = 3;
 scene.add(sun);
 
 const ambient = new THREE.AmbientLight();
 ambient.intensity = 0.5;
 scene.add(ambient);
 
-const geometry = new THREE.BoxGeometry( 1, 1, 1 );
-const material = new THREE.MeshStandardMaterial( { color: 0x00ff00 } );
-const cube = new THREE.Mesh( geometry, material );
-scene.add( cube );
-
-camera.position.z = 5;
+camera.position.set(10,2,10);
 controls.update();
 
-
-
 function animate() {
-
-	// cube.rotation.x += 0.01;
-	// cube.rotation.y += 0.01;
     controls.update();
     stats.update();
 	renderer.render( scene, camera );
-
 }
 
 window.addEventListener('resize' , () => {
@@ -52,6 +46,11 @@ window.addEventListener('resize' , () => {
     renderer.setSize(window.innerWidth, window.innerHeight);
 });
 
-const folder = gui.addFolder('Cube');
-folder.add(cube.position, 'x', -2,2,0.1).name('Pos X');
-folder.addColor(cube.material, 'color').name('Color');
+const worldFolder = gui.addFolder('World');
+worldFolder.add(world, 'width', 1,200,1).name('Width');
+worldFolder.add(world, 'height', 1,200,1).name('Height');
+worldFolder.addColor(world.terrain.material, 'color').name('Color');
+worldFolder.add(world, 'height', 1,200,1).name('Height');
+worldFolder._onChange = () => {
+    world.createTerrain();
+}
