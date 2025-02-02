@@ -20,6 +20,7 @@ renderer.setAnimationLoop( animate );
 document.body.appendChild( renderer.domElement );
 
 const world = new World(5,5);
+// world.receiveShadow = true;
 scene.add(world);
 
 const sun = new THREE.DirectionalLight();
@@ -49,8 +50,13 @@ window.addEventListener('resize' , () => {
 const worldFolder = gui.addFolder('World');
 worldFolder.add(world, 'width', 1,200,1).name('Width');
 worldFolder.add(world, 'height', 1,200,1).name('Height');
-worldFolder.addColor(world.terrain.material, 'color').name('Color');
-worldFolder.add(world, 'height', 1,200,1).name('Height');
-worldFolder._onChange = () => {
-    world.createTerrain();
-}
+// worldFolder.addColor(world.terrain.material, 'color').name('Color');
+
+worldFolder.add(world, 'treeCount', 1,200,1).name('Trees');
+worldFolder.add(world, 'rockCount', 1,200,1).name('Rocks');
+worldFolder.add(world, 'bushCount', 1,200,1).name('Bushes');
+
+worldFolder.add(world, 'generate').name('Generate');
+// worldFolder._onChange = () => {
+//     world.createTerrain();
+// }
